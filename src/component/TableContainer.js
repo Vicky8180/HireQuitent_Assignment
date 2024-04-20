@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import TableContainer from '@mui/material/TableContainer';
 import Paper from '@mui/material/Paper';
@@ -9,34 +7,36 @@ import TableBody from '@mui/material/TableBody';
 import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 
-const TableContainer2 = ({ holdings }) => {
+const TableContainer2 = (props) => {
+  const data= props.data
   return (
     <>
-      {holdings && holdings.length > 0? (
-        <TableContainer component={Paper}>
+      {data && data.length > 0? (
+        <TableContainer  component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="caption table">
          
             <TableHead>
-              <TableRow>
-                <TableCell>Name</TableCell>
-                <TableCell align="right">Ticker</TableCell>
-                <TableCell align="right">Avg Price</TableCell>
-                <TableCell align="right">Market Price</TableCell>
-                <TableCell align="right">Latest Change (%)</TableCell>
-                <TableCell align="right">Market Value</TableCell>
+              <TableRow >
+                <TableCell style={{ cursor: 'pointer', color:'#1e467f', fontWeight: '500' }}>NAME</TableCell>
+                <TableCell style={{ cursor: 'pointer', color:'#1e467f', fontWeight: '500' }}>TICKER</TableCell>
+                <TableCell style={{ cursor: 'pointer', color:'#1e467f', fontWeight: '500' }}>AVG PRICE</TableCell>
+                <TableCell style={{ cursor: 'pointer', color:'#1e467f', fontWeight: '500' }}>MARKET PRICE</TableCell>
+                <TableCell style={{ cursor: 'pointer', color:'#1e467f', fontWeight: '500' }} >LATEST CHANGE (%)</TableCell>
+                <TableCell style={{ cursor: 'pointer', color:'#1e467f', fontWeight: '500' }}>MARKET VALUE</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-              {holdings.map((row) => (
+            <TableBody style={{ backgroundColor: '#f5fafa' }}>
+              {data.map((row) => (
                 <TableRow key={row.name}>
                   <TableCell component="th" scope="row">
                     {row.name}
                   </TableCell>
-                  <TableCell align="right">{row.ticker}</TableCell>
-                  <TableCell align="right">{row.avg_price}</TableCell>
-                  <TableCell align="right">{row.market_price}</TableCell>
-                  <TableCell align="right">{row.latest_chg_pct}</TableCell>
-                  <TableCell align="right">{row.market_value_ccy}</TableCell>
+                  <TableCell >{row.ticker}</TableCell>
+                  <TableCell >{row.avg_price}</TableCell>
+                  <TableCell >{row.market_price}</TableCell>
+                  {row.latest_chg_pct>0 ?<TableCell >{row.latest_chg_pct}</TableCell>: <TableCell style={{ color:'red' }} >{row.latest_chg_pct}</TableCell>}
+                  
+                  <TableCell >{row.market_value_ccy}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
